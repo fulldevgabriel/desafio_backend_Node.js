@@ -5,10 +5,12 @@
   "name": "desafio-back-end-novos-devs",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/server.js"
+    "start": "nodemon ./src/server.js"
   },
   "keywords": [],
   "author": "",
