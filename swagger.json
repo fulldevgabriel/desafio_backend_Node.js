@@ -1,0 +1,260 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Minha API",
+        "version": "1.0.0",
+        "description": "Documentação da API com Swagger"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/api/user": {
+            "post": {
+                "description": "Criar Usuário",
+                "summary": "Cria um usuário e armazena-o no banco de dados em memória",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userName": {
+                                        "type": "string",
+                                        "description": "nome do usuário",
+                                        "example": "exemplo"
+                                    },
+                                    "userEmail": {
+                                        "type": "string",
+                                        "description": "email usuario",
+                                        "example": "example@exam.com"
+                                    },
+                                    "userPass": {
+                                        "type": "string",
+                                        "description": "senha usuario",
+                                        "example": "123"
+                                    },
+                                    "confirmPass": {
+                                        "type": "string",
+                                        "description": "confirmação senha usuário",
+                                        "example": "123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário criado com sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "mensagem de usuario criado",
+                                            "example": "usuario criado com sucesso"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro",
+                                            "example": "Senha não confere || Email já cadastrado"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "description": "login usuário",
+                "summary": "Faz a autenticação do usuário e retorna um token JWT",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userEmail": {
+                                        "type": "string",
+                                        "description": "Login usuário",
+                                        "example": "example@exam.com"
+                                    },
+                                    "userPass": {
+                                        "type": "string",
+                                        "description": "Login usuário",
+                                        "example": "123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login bem sucedido - retorna mensagem e token para autenticação",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "mensagem de sucesso",
+                                            "example": "login efetuado com sucesso!"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "description": "token para autenticação",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro",
+                                            "example": "Usuario ou senha incorretos!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro",
+                                            "example": "Error interno ${err}"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "get": {
+                "description": "Listar usuários",
+                "summary": "Retorna todos os usuários, exigindo autenticação via token JWT",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "userName": {
+                                                "type": "string",
+                                                "description": "nome do usuário",
+                                                "example": "exemplo"
+                                            },
+                                            "userEmail": {
+                                                "type": "string",
+                                                "description": "email usuario",
+                                                "example": "example@exam.com"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro token não fornecido",
+                                            "example": "Error token não fornecido"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Mensagem de erro token inválido ou expirado",
+                                            "example": "Token inválido ou expirado, ${err}"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "JWT Bearer Token"
+            }
+        }
+    }
+}
