@@ -33,17 +33,17 @@
                                     "userEmail": {
                                         "type": "string",
                                         "description": "email usuario",
-                                        "example": "example@exam.com"
+                                        "example": "exemplo@email.com"
                                     },
                                     "userPass": {
                                         "type": "string",
                                         "description": "senha usuario",
-                                        "example": "123"
+                                        "example": "123456"
                                     },
                                     "confirmPass": {
                                         "type": "string",
                                         "description": "confirmação senha usuário",
-                                        "example": "123"
+                                        "example": "123456"
                                     }
                                 }
                             }
@@ -102,12 +102,12 @@
                                     "userEmail": {
                                         "type": "string",
                                         "description": "Login usuário",
-                                        "example": "example@exam.com"
+                                        "example": "exemplo@email.com"
                                     },
                                     "userPass": {
                                         "type": "string",
                                         "description": "Login usuário",
-                                        "example": "123"
+                                        "example": "123456"
                                     }
                                 }
                             }
@@ -201,7 +201,7 @@
                                             "userEmail": {
                                                 "type": "string",
                                                 "description": "email usuario",
-                                                "example": "example@exam.com"
+                                                "example": "exemplo@email.com"
                                             }
                                         }
                                     }
