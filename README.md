@@ -1,4 +1,6 @@
-# API REST com Node.js
+<h1>
+   API REST com Node.js
+</h1>
 
 ## Descrição
 Esta é uma API REST desenvolvida em Node.js que inclui autenticação JWT e documentação com Swagger. A API permite o cadastro, login e listagem de usuários armazenados em um banco de dados em memória.
