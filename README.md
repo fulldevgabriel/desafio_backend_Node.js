@@ -1,4 +1,4 @@
-<h1>
+<h1 align="center">
    API REST com Node.js
 </h1>
 
